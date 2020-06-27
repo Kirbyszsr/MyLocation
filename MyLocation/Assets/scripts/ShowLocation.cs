@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShowLocation : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class ShowLocation : MonoBehaviour
     //AP离各个物件的距离
     public Vector3[] startLocations;
     //各个AP的中心点坐标（保存原点）
+
+    public GameObject distancetext;
+    //显示界面
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +54,17 @@ public class ShowLocation : MonoBehaviour
             distances[n] = Vector3.Distance(v3, player.transform.position);
             n++;
         }
+
+        string textField = "";
+        n = 1;
+        foreach(float distance in distances)
+        {
+            textField += "distance for AP " + n + ":" + distance + "\n";
+            n++;
+        }
+        Text text = distancetext.GetComponent<Text>();
+        text.text = textField;
+
     }
 
     void setCircles()
